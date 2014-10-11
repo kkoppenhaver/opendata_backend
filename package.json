@@ -5,6 +5,9 @@
   "private": true,
   "dependencies": {
     "express": "4.x",
-    "yelp": "0.1.1"
+    "yelp": "0.1.1",
+    "getconfig": "0.3.0",
+    "request": "2.45.0",
+    "fuzzy":  "0.1.0"
   }
 }
