@@ -30,7 +30,7 @@ app.get('/get-opendata', function (req, res) {
 });
 
 var getOpenData = function (name, zip, response) {
-    var url = config.openData.url || process.env.openDataUrl + "collections/restaurants?q={ \"DBA Name\": " + name + ", Zip: " + zip + "}&apiKey=" + config.openData.apiKey || openDataApiKey;
+    var url = config.openData.url || process.env.openDataUrl + "collections/restaurants?q={ \"DBA Name\": " + name + ", Zip: " + zip + "}&apiKey=" + config.openData.apiKey || process.env.openDataApiKey;
     var openDataResults;
     request.get(url, function (e, r, openDataResults) {
         var data = JSON.parse(openDataResults);
