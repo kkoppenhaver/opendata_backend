@@ -15,7 +15,7 @@ function parseYelp(restaurantName, zipcode) {
 }
 
 app.get('/get-restaurant', function(req, res){
-  data = { "name": req.query.name, "zipcode": req.query.zipcode };
+  data = { "name": req.query.name, "zipcode": req.query.zipcode, "searchCompleted": true };
   res.json(data);
   res.end();
 });
