@@ -4,7 +4,6 @@ var config = require('getconfig');
 
 
 function parseYelp(restaurantName, zipcode) {
-	console.log(config.yelp.token);
 	return { "Yelp": true}
 }
 
