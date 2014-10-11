@@ -2,8 +2,8 @@ var express = require('express');
 var app = express();
 
 app.get('/get-restaurant', function(req, res){
-  console.log(req.query.name);
-  console.log(req.query.zipcode);
+  data = { "name ": req.query.name, "price": req.query.zipcode };
+  res.json(data);
   res.end();
 });
 
