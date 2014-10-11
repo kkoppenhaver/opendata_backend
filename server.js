@@ -2,7 +2,12 @@ var express = require('express');
 var app = express();
 var config = require('getconfig');
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT);
+
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 
 function parseYelp(restaurantName, zipcode) {
