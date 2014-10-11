@@ -1,24 +1,10 @@
 var express = require('express');
 var app = express();
 
-app.get('/', function(req, res){
-  res.send('Hello World!');
-});
-
-app.get('/yelp', function(req, res){
-  res.send('Yelp');
-});
-
-app.get('/opentable', function(req, res){
-  res.send('Opentable');
-});
-
-app.get('/grubhub', function(req, res){
-  res.send('Grubhub');
-});
-
-app.get('/groupon', function(req, res){
-  res.send('Groupon');
+app.get('/get-restaurant', function(req, res){
+  console.log(req.query.name);
+  console.log(req.query.zipcode);
+  res.end();
 });
 
 var server = app.listen(3000, function() {
