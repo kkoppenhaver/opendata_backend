@@ -1,16 +1,13 @@
 {
-<<<<<<< HEAD
     "yelp": {
         "consumer_key": "0hbn62PwEMwbNifPcQ3mbw", 
         "consumer_secret": "NgWnOt3qMFHLvV9mUj6P65tJkng",
         "token": "nNNKhlZ6TqiyQK4NC56_5RL5NTVpFRdt",
         "token_secret": "4eX3KZzXptwdpg22eESGL67nkyY"
-    }
-=======
+    },
 	"openData":
 	{
 		"url": "https://api.mongolab.com/api/1/databases/opendata_backend/",
 		"apiKey": "imVMTK-eNKFUwpeU_5wJEJKWe-3mgtfI"
 	}
->>>>>>> origin/opendata
 }
