@@ -3,6 +3,7 @@ var express = require('express');
 var config = require('getConfig');
 var app = express();
 var request = require("request");
+var string = require("string");
 
 app.get('/get-restaurant', function(req, res){
   data = { "name ": req.query.name, "price": req.query.zipcode };
@@ -36,6 +37,7 @@ var getOpenData = function (name, zip, response) {
             "Location": firstData["Location"],
             "InspectionViolations": firstData["Violations"],
             "YelpRating": "",
+            "YelpReviewCount": -1,
             "SearchCompleted": true,
         };
         console.log(output);
