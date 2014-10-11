@@ -1,5 +1,10 @@
+var http = require("http");
 var express = require('express');
+var config = require('getConfig');
 var app = express();
+var request = require("request");
+var string = require("string");
+
 var config = require('getconfig');
 
 app.listen(process.env.PORT);
@@ -8,7 +13,6 @@ app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
-
 
 function parseYelp(restaurantName, zipcode) {
 	return { "Yelp": true}
@@ -21,33 +25,39 @@ app.get('/get-restaurant', function(req, res){
 });
 
 app.get('/get-opendata', function (req, res) {
-    data = { "name": req.query.name, "zip": req.query.zip };
-    res.json(data);
-    res.end();
+    dataIn = { "name": req.query.name, "zip": req.query.zip };
+    getOpenData(dataIn.name, dataIn.zip, res);
 });
 
-// get is a simple wrapper for request()
-// which sets the http method to GET
-var getOpenData = http.get(url, function (response) {
-    // data is streamed in chunks from the server
-    // so we have to handle the "data" event    
-    var buffer = "",
-        data,
-        route;
+var getOpenData = function (name, zip, response) {
+    var url = config.openData.url + "collections/restaurants?q={ \"DBA Name\": " + name + ", Zip: " + zip + "}&apiKey=" + config.openData.apiKey;
+    var openDataResults;
+    request.get(url, function (e, r, openDataResults) {
+        var data = JSON.parse(openDataResults);
+        var firstData = data[0];
 
-    response.on("data", function (chunk) {
-        buffer += chunk;
+        var output =
+        {
+            "Name": firstData["DBA Name"],
+            "Address1": firstData["Address"],
+            "City": firstData["City"],
+            "State": firstData["State"],
+            "Zip": firstData["Zip"],
+            "Risk": firstData["Risk"],
+            "Results": firstData["Results"],
+            "Latitude": firstData["Latitude"],
+            "Longitude": firstData["Longitude"],
+            "Location": firstData["Location"],
+            "InspectionViolations": firstData["Violations"],
+            "YelpRating": "",
+            "YelpReviewCount": -1,
+            "SearchCompleted": true,
+        };
+        console.log(output);
+        response.json(output);
+        response.end();
     });
-
-    response.on("end", function (err) {
-        // finished transferring data
-        // dump the raw data
-        console.log(buffer);
-        console.log("\n");
-        data = JSON.parse(buffer);
-        res.end(data);
-    });
-});
+};
 
 var server = app.listen(3000, function() {
     console.log('Listening on port %d', server.address().port);
