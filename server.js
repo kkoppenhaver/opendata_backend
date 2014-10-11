@@ -4,8 +4,17 @@ var config = require('getconfig');
 
 
 function parseYelp(restaurantName, zipcode) {
-	console.log(config.yelp.token);
-	return { "Yelp": true}
+	var yelp = require("yelp").createClient({
+	  consumer_key: config.yelp.consumer_key, 
+	  consumer_secret: config.yelp.consumer_secret,
+	  token: config.yelp.token,
+	  token_secret: config.yelp.token_secret
+	});
+
+	//See http://www.yelp.com/developers/documentation/v2/search_api
+	yelp.search({term: restaurantName, location: zipcode}, function(error, data) {
+		console.log(data);
+	});
 }
 
 app.get('/get-restaurant', function(req, res){
