@@ -24,6 +24,7 @@ app.get('/get-restaurant', function(req, res){
 });
 
 app.get('/get-opendata', function (req, res) {
+    console.log('testing stuff');
     dataIn = { "name": req.query.name, "zip": req.query.zip };
     getOpenData(dataIn.name, dataIn.zip, res);
 });
