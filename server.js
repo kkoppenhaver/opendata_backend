@@ -26,11 +26,14 @@ app.get('/get-restaurant', function(req, res){
 app.get('/get-opendata', function (req, res) {
     console.log('testing stuff');
     dataIn = { "name": req.query.name, "zip": req.query.zip };
+    console.log(dataIn);
+    console.log('calling open data function');
     getOpenData(dataIn.name, dataIn.zip, res);
 });
 
 var getOpenData = function (name, zip, response) {
-    var url = config.openData.url || process.env.openDataUrl + "collections/restaurants?q={ \"DBA Name\": " + name + ", Zip: " + zip + "}&apiKey=" + config.openData.apiKey || process.env.openDataApiKey;
+    console.log('in open data function');
+    var url = process.env.openDataUrl ||  config.openData.url + "collections/restaurants?q={ \"DBA Name\": " + name + ", Zip: " + zip + "}&apiKey=" + process.env.openDataApiKey || config.openData.apiKey;
     var openDataResults;
     request.get(url, function (e, r, openDataResults) {
         var data = JSON.parse(openDataResults);
