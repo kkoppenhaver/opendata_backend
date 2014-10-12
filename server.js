@@ -12,7 +12,7 @@ var yelp = require("yelp").createClient({
 });
 
 var app = express();
-
+app.listen(process.env.PORT);
 app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   next();
