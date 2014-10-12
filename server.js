@@ -3,7 +3,6 @@ var express = require('express');
 var app = express();
 var request = require("request");
 var string = require("string");
-
 var config = require('getconfig');
 
 app.listen(process.env.PORT);
@@ -24,12 +23,17 @@ app.get('/get-restaurant', function(req, res){
 });
 
 app.get('/get-opendata', function (req, res) {
+    console.log('testing stuff');
     dataIn = { "name": req.query.name, "zip": req.query.zip };
+    console.log(dataIn);
+    console.log('calling open data function');
     getOpenData(dataIn.name, dataIn.zip, res);
 });
 
 var getOpenData = function (name, zip, response) {
     var url = config.openData.url + "collections/restaurants?q={ \"DBA Name\": " + name || "" + ", Zip: " + zip || 00000 + "}&apiKey=" + config.openData.apiKey;
+    console.log('in open data function');
+    var url = process.env.openDataUrl ||  config.openData.url + "collections/restaurants?q={ \"DBA Name\": " + name + ", Zip: " + zip + "}&apiKey=" + process.env.openDataApiKey || config.openData.apiKey;
     var openDataResults;
     request.get(url, function (e, r, openDataResults) {
         var data = JSON.parse(openDataResults);
