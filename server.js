@@ -68,6 +68,15 @@ var getOpenData = function (name, zip, response) {
             console.log(output);
             response.json(output);
         }
+        else
+        {
+            var output =
+            {
+                "inputname": name,
+                "inputzip": zip,
+                "errorMessage": "No results found. No double quotes in input name",
+            };
+        }
         response.end();
     });
 };
