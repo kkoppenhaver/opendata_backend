@@ -50,20 +50,20 @@ var getOpenData = function (name, zip, response) {
         if (firstData) {
             var output =
             {
-                "Name": firstData["DBA Name"],
-                "Address1": firstData["Address"],
-                "City": firstData["City"],
-                "State": firstData["State"],
-                "ZipCode": firstData["Zip"],
-                "Risk": firstData["Risk"],
-                "Results": firstData["Results"],
-                "Latitude": firstData["Latitude"],
-                "Longitude": firstData["Longitude"],
-                "Location": firstData["Location"],
-                "InspectionViolations": firstData["Violations"],
-                "YelpRating": "",
-                "YelpReviewCount": -1,
-                "SearchCompleted": true,
+                "name": firstData["DBA Name"],
+                "address1": firstData["Address"],
+                "city": firstData["City"],
+                "state": firstData["State"],
+                "zipcode": firstData["Zip"],
+                "risk": firstData["Risk"],
+                "results": firstData["Results"],
+                "latitude": firstData["Latitude"],
+                "longitude": firstData["Longitude"],
+                "location": firstData["Location"],
+                "inspectionViolations": firstData["Violations"],
+                "yelpRating": "",
+                "yelpReviewCount": -1,
+                "searchCompleted": true,
             };
             console.log(output);
             response.json(output);
