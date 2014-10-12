@@ -35,7 +35,7 @@ var getOpenData = function (name, zip, response) {
     apiKey = process.env.openDataApiKey || config.openData.apiKey;
     console.log("Input Name:" + name);
     console.log("Input Zip:" + zip);
-    var url = (process.env.openDataUrl || config.openData.url) + "collections/restaurants?q={ \"DBA Name\": " + (name || "") + ", Zip: " + (zip || 00000) + "}&apiKey=" + (config.openData.apiKey || process.env.openDataApiKey);
+    var url = (process.env.openDataUrl || config.openData.url) + "collections/restaurants?q={ \"DBA Name\": \"" + (name || "") + "\", Zip: " + (zip || 00000) + "}&apiKey=" + (config.openData.apiKey || process.env.openDataApiKey);
     console.log("URL: " + url);
     var openDataResults;
     request.get(url, function (e, r, openDataResults) {
