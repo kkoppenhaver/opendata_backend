@@ -33,7 +33,11 @@ app.get('/get-opendata', function (req, res) {
 
 var getOpenData = function (name, zip, response) {
     console.log('in open data function');
-    var url = process.env.openDataUrl ||  config.openData.url + "collections/restaurants?q={ \"DBA Name\": " + name + ", Zip: " + zip + "}&apiKey=" + process.env.openDataApiKey || config.openData.apiKey;
+    openDataUrl = process.env.openDataUrl ||  config.openData.url;
+    apiKey = process.env.openDataApiKey || config.openData.apiKey;
+
+    var url = openDataUrl + "collections/restaurants?q={ \"DBA Name\": " + name + ", Zip: " + zip + "}&apiKey=" + apiKey;
+    console.log(url);
     var openDataResults;
     request.get(url, function (e, r, openDataResults) {
         var data = JSON.parse(openDataResults);
