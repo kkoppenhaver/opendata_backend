@@ -16,15 +16,20 @@ function parseYelp(restaurantName, zipcode) {
 	return { "Yelp": true}
 }
 
-app.get('/get-restaurant', function(req, res){
-  data = { "name": req.query.name, "zipcode": req.query.zipcode, "searchCompleted": true };
-  res.json(data);
-  res.end();
+app.get('/get-restaurant', function (req, res) {
+    console.log('testing stuff');
+    dataIn = { "name": req.query.name, "zip": req.query.zipcode };
+    console.log(dataIn);
+    console.log('calling open data function');
+    getOpenData(dataIn.name, dataIn.zip, res);
+  //data = { "name": req.query.name, "zipcode": req.query.zipcode, "searchCompleted": true };
+  //res.json(data);
+  //res.end();
 });
 
 app.get('/get-opendata', function (req, res) {
     console.log('testing stuff');
-    dataIn = { "name": req.query.name, "zip": req.query.zip };
+    dataIn = { "name": req.query.name, "zip": req.query.zipcode };
     console.log(dataIn);
     console.log('calling open data function');
     getOpenData(dataIn.name, dataIn.zip, res);
@@ -49,7 +54,7 @@ var getOpenData = function (name, zip, response) {
                 "Address1": firstData["Address"],
                 "City": firstData["City"],
                 "State": firstData["State"],
-                "Zip": firstData["Zip"],
+                "ZipCode": firstData["Zip"],
                 "Risk": firstData["Risk"],
                 "Results": firstData["Results"],
                 "Latitude": firstData["Latitude"],
