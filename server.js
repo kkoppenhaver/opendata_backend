@@ -29,31 +29,34 @@ app.get('/get-opendata', function (req, res) {
 });
 
 var getOpenData = function (name, zip, response) {
-    var url = config.openData.url + "collections/restaurants?q={ \"DBA Name\": " + name + ", Zip: " + zip + "}&apiKey=" + config.openData.apiKey;
+    var url = config.openData.url + "collections/restaurants?q={ \"DBA Name\": " + name || "" + ", Zip: " + zip || 00000 + "}&apiKey=" + config.openData.apiKey;
     var openDataResults;
     request.get(url, function (e, r, openDataResults) {
         var data = JSON.parse(openDataResults);
-        var firstData = data[0];
+        var firstData = data[0] || null;
 
-        var output =
-        {
-            "Name": firstData["DBA Name"],
-            "Address1": firstData["Address"],
-            "City": firstData["City"],
-            "State": firstData["State"],
-            "Zip": firstData["Zip"],
-            "Risk": firstData["Risk"],
-            "Results": firstData["Results"],
-            "Latitude": firstData["Latitude"],
-            "Longitude": firstData["Longitude"],
-            "Location": firstData["Location"],
-            "InspectionViolations": firstData["Violations"],
-            "YelpRating": "",
-            "YelpReviewCount": -1,
-            "SearchCompleted": true,
-        };
-        console.log(output);
-        response.json(output);
+        if (firstData) {
+            var output =
+            {
+                "Name": firstData["DBA Name"],
+                "Address1": firstData["Address"],
+                "City": firstData["City"],
+                "State": firstData["State"],
+                "Zip": firstData["Zip"],
+                "Risk": firstData["Risk"],
+                "Results": firstData["Results"],
+                "Latitude": firstData["Latitude"],
+                "Longitude": firstData["Longitude"],
+                "Location": firstData["Location"],
+                "InspectionViolations": firstData["Violations"],
+                "YelpRating": "",
+                "YelpReviewCount": -1,
+                "SearchCompleted": true,
+            };
+            console.log(output);
+            response.json(output);
+        }
+
         response.end();
     });
 };
