@@ -47,8 +47,9 @@ var getOpenData = function (name, zip, response) {
         var data = JSON.parse(openDataResults);
         var firstData = data[0];
 
+        var output;
         if (firstData) {
-            var output =
+            output =
             {
                 "name": firstData["DBA Name"],
                 "address1": firstData["Address"],
@@ -65,18 +66,17 @@ var getOpenData = function (name, zip, response) {
                 "yelpReviewCount": -1,
                 "searchCompleted": true,
             };
-            console.log(output);
-            response.json(output);
         }
-        else
-        {
-            var output =
+        else {
+            output =
             {
                 "inputname": name,
                 "inputzip": zip,
                 "errorMessage": "No results found. No double quotes in input name",
             };
         }
+        console.log(output);
+        response.json(output);
         response.end();
     });
 };
