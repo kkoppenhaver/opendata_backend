@@ -33,6 +33,7 @@ function getYelpResponseAsync(data) {
 }
 
 app.get('/get-restaurant', function (req, res) {
+    res.header("Access-Control-Allow-Origin", "*");
     dataIn = { "name": req.query.name, "zip": req.query.zipcode };
     getYelpResponseAsync(dataIn).then(function(data) {
         yelpData = data;
